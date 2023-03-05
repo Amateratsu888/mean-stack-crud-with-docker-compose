@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  angular-app:
+    build: ./frontend
+    ports:
+      - "8080:80"
+  
+  nodejs-app:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    volumes:
+      - ./mongodb-data:/data/db
+    ports:
+      - "27017:27017"
